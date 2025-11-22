@@ -55,8 +55,17 @@ func URLInfoHandler(c *gin.Context) {
 	// Create the URL for the Wikipedia API request
 	apiURL := fmt.Sprintf("https://en.wikipedia.org/w/api.php?%s", queryParams.Encode())
 
+	req, err := http.NewRequest("GET", apiURL, nil)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"message": "Failed to create request"})
+		return
+	}
+
+	req.Header.Set("User-Agent", "GoGoPowerRangers/1.0 (https://github.com/yourusername/GoGoPowerRangers; contact@example.com)")
+
 	// Send the GET request to Wikipedia API
-	resp, err := http.Get(apiURL)
+	client := &http.Client{}
+	resp, err := client.Do(req)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"message": "Failed to fetch data from Wikipedia"})
 		return

@@ -22,17 +22,17 @@ type AutoComplete struct {
 }
 
 type Page struct {
-	PageID    int `json:"pageid"`
-	NS        int `json:"ns"`
-	Title     string
-	Index     int `json:"index"`
+	PageID    int    `json:"pageid"`
+	NS        int    `json:"ns"`
+	Title     string `json:"title"`
+	Index     int    `json:"index"`
 	Thumbnail struct {
-		Source string
-		Width  int
-		Height int
-	}
+		Source string `json:"source"`
+		Width  int    `json:"width"`
+		Height int    `json:"height"`
+	} `json:"thumbnail"`
 	Terms struct {
-		Description []string
-	}
+		Description []string `json:"description"`
+	} `json:"terms"`
 	FullURL string `json:"fullurl"`
 }
